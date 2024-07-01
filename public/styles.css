@@ -306,7 +306,53 @@
     font-family: 'Emulogic Regular'; 
   }
 
-  
+.pacman {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: 20px;   /* Ndryshoni width në 20px */
+  height: 20px;  /* Ndryshoni height në 20px */
+  background: #464667;
+}
+
+.mouth {
+  animation: eat 0.5s alternate infinite;
+  animation-timing-function: linear;
+  position: absolute;
+  width: 13px;   /* Ndryshoni width në 13px */
+  height: 0;
+  border-top: 7px solid transparent;    /* Ndryshoni border-top në 7px */
+  border-bottom: 7px solid transparent; /* Ndryshoni border-bottom në 7px */
+  border-left: 13px solid #fff;         /* Ndryshoni border-left në 13px */
+}
+
+@keyframes eat {
+  0% {
+    border-top: 8px solid transparent;  /* Ndryshoni border-top në 8px */
+    border-bottom: 8px solid transparent;  /* Ndryshoni border-bottom në 8px */
+  }
+  100% {
+    border-top: 0 solid transparent;
+    border-bottom: 0 solid transparent;
+  }
+}
+
+@keyframes foodie {
+  0% {
+    transform: translateX(-1px);   /* Ndryshoni transform translateX në -1px */
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-17px);  /* Ndryshoni transform translateX në -17px */
+    opacity: 0;
+  }
+}
+
 
   /* .pacman-image-left {
     transform: rotate(180deg);
@@ -331,3 +377,6 @@
   }
   
  
+
+
+  
