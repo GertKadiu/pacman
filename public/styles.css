@@ -1,6 +1,15 @@
-body{
+@font-face {
+    font-family: 'Emulogic Regular';
+    src: url('./Font/Emulogic-zrEw.ttf') format('woff2'),
+         url('./Font/Emulogic-zrEw.ttf') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  body {
+    font-family: 'Emulogic Regular'; 
     background-color: black;
-}
+  }
 
 .grid {
     width: 560px;
@@ -56,6 +65,7 @@ body{
     color: white;
     padding: 5px;
     border-radius: 5px;
+    font-family: 'Emulogic Regular'; 
 }
 
 .wall {
@@ -89,6 +99,10 @@ body{
    border: 0px !important;
   }
 
+
+  #h3{
+    color: red;
+  }
  
   
   .pacman-image-down {
@@ -236,6 +250,64 @@ body{
     height: 20px;
     width: auto;
 }
+
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+     /* background-color: #1E1D23; */
+    border-radius: 5px;
+    padding: 30px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    color: #FFFFFF;
+    text-align: center;
+  }
+  
+  .lives-display {
+    display: flex;
+    align-items: center;
+  }
+  
+  .life-image {
+    width: 30px; /* Përshtatni dimensionet sipas nevojës */
+    height: auto;
+    margin-right: 5px; /* Vendosni një distancë mes imazheve */
+  }
+  
+
+  .close-modal {
+    position: absolute;
+    top: 10px; /* ndryshoni sipas nevojës */
+    right: 10px; /* ndryshoni sipas nevojës */
+    cursor: pointer;
+  }
+  
+
+  .restartbtn{
+    cursor: pointer;
+    font-family: 'Emulogic Regular'; 
+  }
+
+  
+
   /* .pacman-image-left {
     transform: rotate(180deg);
   }
