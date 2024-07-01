@@ -1,0 +1,261 @@
+body{
+    background-color: black;
+}
+
+.grid {
+    width: 560px;
+    height: 560px;
+    border: 1px solid black;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.grid div {
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.display{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.flex {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 560px;
+    margin: auto;
+    left: 0;
+}
+
+.points{
+    display: flex;
+    flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+   
+}
+
+.score{
+    color: white;
+    
+}
+
+.startBtn{
+    background-color: #2469ff7e;
+    display: block;
+    cursor: pointer;
+    border: none;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.wall {
+    background-color: #2469ff7e;
+}
+
+
+.pac-dot {
+    background-image: url('./images/dot.png');
+}
+
+.pacman-image {
+ background-image: url('./images/1\ \(4\).png');
+ background-size: cover;
+   border: 0px !important;
+
+  }
+  
+   .pacman-image-left {
+  background-image: url('./images/1\ \(2\).png');
+  background-size: cover;
+   border: 0px !important;
+  }
+
+
+
+  
+  .pacman-image-up {
+    background-image: url('./images/1\ \(3\).png');
+    background-size: cover;
+   border: 0px !important;
+  }
+
+ 
+  
+  .pacman-image-down {
+    background-image: url('./images/1\ \(1\).png');
+  }
+ 
+  
+
+.big-dot {
+    background-image: url('./images/strawberry.png');
+    background-size: cover;
+    border: 0px !important;
+    background-color: transparent !important;
+}
+
+.blinky {
+    background-image: url("./images/blinky.png");
+    background-size: cover;
+    border: 0px !important;
+    background-color: transparent !important;
+}
+
+.pinky {
+    background-image: url("./images/pinky.png");
+    background-size: cover;
+    border: 0px !important;
+    background-color: transparent !important;
+}
+
+.inky {
+    background-image: url("./images/inky.png");
+    background-size: cover;
+    border: 0px !important;
+    background-color: transparent !important;
+}
+
+.clyde {
+    background-image: url("./images/blinky.png");
+    background-size: cover;
+    border: 0px !important;
+    background-color: transparent !important;
+}
+
+
+
+.scared-ghost {
+    background-image: url('./images/blue_ghost.png');
+    background-size: cover;
+    border: 0px !important;
+    background-color: transparent !important;
+}
+
+.ghost {
+    width: 20px;
+    height: auto;
+}
+
+.topRightWall {
+    background-color: #2469ff7e;
+    border-top-right-radius: 35px;
+    height: 20px;
+    margin: 20px;
+}
+
+.bottomRightWall {
+    background-color: #2469ff7e;
+    border-bottom-right-radius: 35px;
+    height: 20px;
+    margin: 20px;
+}
+
+.topLeftWall {
+    background-color: #2469ff7e;
+    border-top-left-radius: 35px;
+    height: 20px;
+    margin: 20px;
+}
+
+
+.bottomLeftWall {
+    background-color: #2469ff7e;
+    border-bottom-left-radius: 35px;
+    height: 20px;
+    margin: 20px;
+}
+
+
+.leftWall{
+    border-bottom-left-radius: 35px;
+    border-top-left-radius: 35px;
+    background-color: #2469ff7e;
+}
+
+.rightWall{
+    border-bottom-right-radius: 35px;
+    border-top-right-radius: 35px;
+    background-color: #2469ff7e;
+}
+
+
+
+
+.wallRadius{
+    border-top-left-radius: 35px ;
+    border-top-right-radius: 35px;
+    background-color: #2469ff7e;
+}
+
+
+.wallRadiusBottom{
+    border-bottom-left-radius: 35px ;
+    border-bottom-right-radius: 35px;
+    background-color: #2469ff7e;
+}
+
+.VCase{
+    border-top-left-radius: 35px ;
+    border-top-right-radius: 35px ;
+    border-bottom-left-radius: 35px ;
+    background-color: #2469ff7e;
+}
+
+.VCase2{
+    border-top-right-radius: 35px ;
+    border-top-left-radius: 35px ;
+    border-bottom-right-radius: 35px ;
+    background-color: #2469ff7e;
+}
+
+.VCase3{
+    border-top-right-radius: 35px ;
+    border-top-left-radius: 35px ;
+    border-bottom-right-radius: 35px ;
+    border-bottom-left-radius: 35px ;
+    background-color: #2469ff7e;
+}
+
+
+.vider{
+    border-bottom-left-radius: 10px ;
+    background-color: #2469ff7e;
+}
+
+.pac-man{
+    height: 20px;
+    width: auto;
+}
+  /* .pacman-image-left {
+    transform: rotate(180deg);
+  }
+  
+  .pacman-image-right {
+    transform: rotate(0deg);
+  }
+  
+  .pacman-image-up {
+    transform: rotate(270deg);
+  }
+  
+  .pacman-image-down {
+    transform: rotate(90deg);
+  } */
+
+/* .pacman-image {
+    transition: transform 0.3s ease;
+    width: 20px; 
+    height: 20px;
+  }
+  
+ 
