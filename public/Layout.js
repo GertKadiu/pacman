@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const squares = []
 
-  function createBoard() {
+   function createBoard() {
     for (let div = 0; div < layout.length; div++) {
       const square = document.createElement("div");
       square.id = div;

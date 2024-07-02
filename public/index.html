@@ -6,32 +6,31 @@
   <link rel="stylesheet" href="styles.css" />
   <script src="Layout.js" type="module"></script>
   <script src="pacmanMovments.js" type="module"></script>
+  <script src="pacmanEat.js" type="module"></script>
 </head>
 <body>   
 
-  <div class="pacman">
-    <div class="eye"></div>
-    <div class="mouth"></div>
-    <div class="food"></div>
-  </div>
   <div class='overlay'>
     <div class='modal'>
-      <img alt="" src="./images/pacman-png-18.png"/>
+      <img alt="" class="img-pac-man" src="./images/pac-man-logo-png-transparent.png"/>
       <h3></h3>
       <button class="restartbtn" id="restartbtn">Restart Game</button>
-      <span class="close-modal">X</span>
+      <span id="close-modal" class="close-modal">X</span>
     </div>
   </div>
   <div class="flex">
-    <div id="pacman" class="pacman">
-      <div id='mouth' class="mouth"></div>
-    </div>
     <div class="points">
       <div class="score">Score:<span class="score" id="score">0</span></div>
       <button class="startBtn" id="start-pause-button">Start Game</button>
     </div>
     <div class="grid"></div>
     <div style="color: aliceblue" id="lives">Lives: 3</div> 
+    <div class="lives-display" id="lives">
+      <img src="./images/pacman-png-18.png" id="heart" class="life-image" alt="heart">
+      <img src="./images/pacman-png-18.png" id="hear" class="life-image" alt="heart">
+      <img src="./images/pacman-png-18.png" id="hear" class="life-image" alt="heart">
+    </div>
+    
   </div>
 </body>
 </html>

@@ -1,3 +1,5 @@
+import layout from "./Matrix.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const squares = document.querySelectorAll(".grid div");
   const scoreDisplay = document.getElementById("score");
@@ -11,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const gameOverSound = new Audio("../public/Sound/gameOver.wav");
   const gameWin = new Audio("../public/Sound/gameWin.wav");
   let score = 0;
-  let pacmanCurrentIndex = 349;
+  let pacmanCurrentIndex = 321;
   let gameStarted = false;
   let gamePaused = false;
   let lives = 3;
@@ -48,9 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
           pacmanCurrentIndex -= 1;
           squares[pacmanCurrentIndex].classList.add("pacman-image-left");
         }
-        if (pacmanCurrentIndex - 1 === 336) {
+        if (pacmanCurrentIndex - 1 === 307) {
           squares[pacmanCurrentIndex].classList.remove("pacman-image-left");
-          pacmanCurrentIndex = 363;
+          pacmanCurrentIndex = 335;
         }
         break;
       case "ArrowRight":
@@ -58,9 +60,9 @@ document.addEventListener("DOMContentLoaded", () => {
           pacmanCurrentIndex += 1;
           squares[pacmanCurrentIndex].classList.add("pacman-image");
         }
-        if (pacmanCurrentIndex + 1 === 364) {
+        if (pacmanCurrentIndex + 1 === 336) {
           squares[pacmanCurrentIndex].classList.remove("pacman-image");
-          pacmanCurrentIndex = 336;
+          pacmanCurrentIndex = 309;
         }
         break;
       case "ArrowUp":
@@ -98,7 +100,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gamePaused = false;
     document.addEventListener("keyup", handleKeyup);
-    ghosts.forEach((ghost) => moveGhost(ghost));
+    ghosts.forEach((ghost) => {
+      ghost.currentIndex = ghost.startIndex;
+      squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
+      moveGhost(ghost);
+    });
     startPauseButton.textContent = "Pause Game";
   }
 
@@ -138,20 +144,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function pacmanEatsBigDot() {
-    if (squares[pacmanCurrentIndex].classList.contains("big-dot")) {
-      eatSound.play();
-      score += 5;
-      scoreDisplay.innerHTML = `${score}`;
-      livesDisplay.innerHTML = `${lives}`;
-      ghosts.forEach((ghost) => (ghost.isScared = true));
-      setTimeout(unScareGhosts, 8000);
-      squares[pacmanCurrentIndex].classList.remove("big-dot");
-    }
-  }
-
   function unScareGhosts() {
-    ghosts.forEach((ghost) => (ghost.isScared = false));
+    ghosts.forEach((ghost) => {
+      ghost.isScared = false;
+      squares[ghost.currentIndex].classList.remove("scared-ghost");
+    });
   }
 
   class Ghost {
@@ -165,71 +162,267 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+
+
   const ghosts = [
-    new Ghost("blinky", 622, 300),
-    new Ghost("pinky", 623, 300),
-    new Ghost("inky", 650, 300),
-    new Ghost("clyde", 651, 300),
+    new Ghost("blinky", 566, 300),
+    new Ghost("pinky", 594, 300),
+    new Ghost("inky", 567, 300),
+    new Ghost("clyde", 595, 300),
   ];
 
+
   ghosts.forEach((ghost) => {
-    squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
+    squares[ghost.startIndex].classList.add(ghost.className, "ghost");
   });
+
+  function pacmanEatsBigDot() {
+    if (squares[pacmanCurrentIndex].classList.contains("big-dot")) {
+      eatSound.play();
+      score += 20;
+      scoreDisplay.innerHTML = `${score}`;
+      ghosts.forEach((ghost) => (ghost.isScared = true));
+      setTimeout(unScareGhosts, 8000);
+      squares[pacmanCurrentIndex].classList.remove("big-dot");
+    }
+  }
 
   function moveGhost(ghost) {
     if (gamePaused) return;
-    const directions = [-1, 1, width, -width];
+
+    const directions = [-1, +1, -width, +width];
     let direction = directions[Math.floor(Math.random() * directions.length)];
 
     ghost.timerId = setInterval(function () {
       if (
-        !squares[ghost.currentIndex + direction].classList.contains("ghost") &&
         !squares[ghost.currentIndex + direction].classList.contains("wall") &&
-        !squares[ghost.currentIndex + direction].classList.contains("leftWall") &&
-        !squares[ghost.currentIndex + direction].classList.contains("rightWall") &&
-        !squares[ghost.currentIndex + direction].classList.contains("topLeftWall") &&
-        !squares[ghost.currentIndex + direction].classList.contains("topRightWall") &&
-        !squares[ghost.currentIndex + direction].classList.contains("bottomLeftWall") &&
-        !squares[ghost.currentIndex + direction].classList.contains("bottomRightWall") &&
-        !squares[ghost.currentIndex + direction].classList.contains("wallRadius") &&
-        !squares[ghost.currentIndex + direction].classList.contains("wallRadiusBottom")
+        !squares[ghost.currentIndex + direction].classList.contains("ghost")
       ) {
         squares[ghost.currentIndex].classList.remove(
           ghost.className,
           "ghost",
           "scared-ghost"
         );
+
         ghost.currentIndex += direction;
+
         squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
-      } else direction = directions[Math.floor(Math.random() * directions.length)];
+      } else {
+        direction = directions[Math.floor(Math.random() * directions.length)];
+      }
 
       if (ghost.isScared) {
         squares[ghost.currentIndex].classList.add("scared-ghost");
       }
 
-      if (
-        ghost.isScared &&
-        squares[ghost.currentIndex].classList.contains(
-          "pacman-image",
-          "pacman-image-left",
-          "pacman-image-up",
-          "pacman-image-down"
-        )
-      ) {
-        ghost.isScared = true;
-        squares[ghost.currentIndex].classList.remove(
-          ghost.className,
-          "ghost",
-          "scared-ghost"
-        );
-
-        ghost.currentIndex = ghost.startIndex;
-        score += 50;
-        scoreDisplay.innerHTML = `Score: ${score}`;
-        squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
+      if (ghost.currentIndex === pacmanCurrentIndex) {
+        if (ghost.isScared) {
+          squares[ghost.currentIndex].classList.remove(
+            ghost.className,
+            "ghost",
+            "scared-ghost"
+          );
+          ghost.currentIndex = ghost.startIndex;
+          score += 100;
+          squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
+        } else {
+          checkForGameOvers();
+        }
       }
-      checkForGameOvers();
+
+      const newDirection = getDirectionTowardsPacman(ghost.currentIndex);
+      if (newDirection !== null) {
+        direction = newDirection;
+      }
     }, ghost.speed);
+  }
+
+  function getDirectionTowardsPacman(ghostIndex) {
+    const ghostX = ghostIndex % width;
+    const ghostY = Math.floor(ghostIndex / width);
+    const pacmanX = pacmanCurrentIndex % width;
+    const pacmanY = Math.floor(pacmanCurrentIndex / width);
+
+    const directions = [];
+
+    if (
+      pacmanX < ghostX &&
+      !squares[ghostIndex - 1].classList.contains("ghost") &&
+      !squares[ghostIndex - 1].classList.contains("wall") &&
+      !squares[ghostIndex - 1].classList.contains("leftWall") &&
+      !squares[ghostIndex - 1].classList.contains("rightWall") &&
+      !squares[ghostIndex - 1].classList.contains("topLeftWall") &&
+      !squares[ghostIndex - 1].classList.contains("topRightWall") &&
+      !squares[ghostIndex - 1].classList.contains("bottomLeftWall") &&
+      !squares[ghostIndex - 1].classList.contains("bottomRightWall") &&
+      !squares[ghostIndex - 1].classList.contains("wallRadius") &&
+      !squares[ghostIndex - 1].classList.contains("wallRadiusBottom")
+      
+    ) {
+      directions.push(-1);
+    }
+    if (
+      pacmanX > ghostX &&
+      !squares[ghostIndex + 1].classList.contains("ghost") &&
+      !squares[ghostIndex + 1].classList.contains("wall") &&
+      !squares[ghostIndex + 1].classList.contains("leftWall") &&
+      !squares[ghostIndex + 1].classList.contains("rightWall") &&
+      !squares[ghostIndex + 1].classList.contains("topLeftWall") &&
+      !squares[ghostIndex + 1].classList.contains("topRightWall") &&
+      !squares[ghostIndex + 1].classList.contains("bottomLeftWall") &&
+      !squares[ghostIndex + 1].classList.contains("bottomRightWall") &&
+      !squares[ghostIndex + 1].classList.contains("wallRadius") &&
+      !squares[ghostIndex + 1].classList.contains("wallRadiusBottom")
+    ) {
+      directions.push(1);
+    }
+    if (
+      pacmanY < ghostY &&
+      !squares[ghostIndex - width].classList.contains("ghost") &&
+      !squares[ghostIndex - width].classList.contains("wall") &&
+      !squares[ghostIndex - width].classList.contains("leftWall") &&
+      !squares[ghostIndex - width].classList.contains("rightWall") &&
+      !squares[ghostIndex - width].classList.contains("topLeftWall") &&
+      !squares[ghostIndex - width].classList.contains("topRightWall") &&
+      !squares[ghostIndex - width].classList.contains("bottomLeftWall") &&
+      !squares[ghostIndex - width].classList.contains("bottomRightWall") &&
+      !squares[ghostIndex - width].classList.contains("wallRadius") &&
+      !squares[ghostIndex - width].classList.contains("wallRadiusBottom")
+    ) {
+      directions.push(-width);
+    }
+    if (
+      pacmanY > ghostY &&
+      !squares[ghostIndex + width].classList.contains("ghost") &&
+      !squares[ghostIndex + width].classList.contains("wall") &&
+      !squares[ghostIndex + width].classList.contains("leftWall") &&
+      !squares[ghostIndex + width].classList.contains("rightWall") &&
+      !squares[ghostIndex + width].classList.contains("topLeftWall") &&
+      !squares[ghostIndex + width].classList.contains("topRightWall") &&
+      !squares[ghostIndex + width].classList.contains("bottomLeftWall") &&
+      !squares[ghostIndex + width].classList.contains("bottomRightWall") &&
+      !squares[ghostIndex + width].classList.contains("wallRadius") &&
+      !squares[ghostIndex + width].classList.contains("wallRadiusBottom")
+    ) {
+      directions.push(width);
+    }
+
+    if (directions.length > 0) {
+      return directions[Math.floor(Math.random() * directions.length)];
+    }
+
+    return null;
+  }
+
+  function restartGame() {
+    score = 0;
+    scoreDisplay.innerHTML = `${score}`;
+    lives = 3;
+    livesDisplay.innerHTML = `Lives: ${lives}`;
+    pacmanCurrentIndex = 321;
+
+    squares.forEach((square) => {
+      square.classList.remove(
+        "big-dot",
+        "ghost",
+        "scared-ghost",
+        "inky",
+        "pinky",
+        "blinky",
+        "clyde",
+        "pacman-image",
+        "pacman-image-left",
+        "pacman-image-up",
+        "pacman-image-down",
+        "pac-dot"
+      );
+    });
+
+    squares[pacmanCurrentIndex].classList.add("pacman-image");
+
+    ghosts.forEach((ghost) => {
+      ghost.currentIndex = ghost.startIndex;
+      squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
+    });
+    ghosts.forEach((ghost) => clearInterval(ghost.timerId));
+
+    createBoard();
+
+    gameStarted = false;
+    startPauseButton.textContent = "Start Game";
+
+    hideModal();
+  }
+
+  document.getElementById("close-modal").addEventListener("click", restartGame);
+  document.getElementById("restartbtn").addEventListener("click", restartGame);
+
+  function createBoard() {
+    squares.forEach((square, index) => {
+      square.className = "";
+      if (layout[index] === 0) {
+        squares[index].classList.add("pac-dot");
+      }
+
+      if (layout[index] === 1) {
+        squares[index].classList.add("wall");
+      }
+
+      if (layout[index] === 2) {
+        squares[index].classList.add("ghost-lair");
+      }
+
+      if (layout[index] === 3) {
+        squares[index].classList.add("big-dot");
+      }
+
+      if (layout[index] === 5) {
+        squares[index].classList.add("topRightWall");
+      }
+
+      if (layout[index] === 6) {
+        squares[index].classList.add("bottomRightWall");
+      }
+
+      if (layout[index] === 7) {
+        squares[index].classList.add("radius");
+      }
+
+      if (layout[index] === 8) {
+        squares[index].classList.add("topLeftWall");
+      }
+
+      if (layout[index] === 9) {
+        squares[index].classList.add("bottomLeftWall");
+      }
+      if (layout[index] === 10) {
+        squares[index].classList.add("leftWall");
+      }
+
+      if (layout[index] === 11) {
+        squares[index].classList.add("rightWall");
+      }
+
+      if (layout[index] === 12) {
+        squares[index].classList.add("wallRadius");
+      }
+      if (layout[index] === 13) {
+        squares[index].classList.add("VCase");
+      }
+      if (layout[index] === 14) {
+        squares[index].classList.add("VCase2");
+      }
+      if (layout[index] === 15) {
+        squares[index].classList.add("VCase3");
+      }
+
+      if (layout[index] === 16) {
+        squares[index].classList.add("wallRadiusBottom");
+      }
+      if (layout[index] === 17) {
+        squares[index].classList.add("vider");
+      }
+    });
   }
 
   function checkForGameOvers() {
@@ -258,7 +451,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "pacman-image-up",
           "pacman-image-down"
         );
-        pacmanCurrentIndex = 349;
+        pacmanCurrentIndex = 321;
         squares[pacmanCurrentIndex].classList.add("pacman-image");
 
         startPauseButton.textContent = "Resume Game";
@@ -266,47 +459,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function restartGame() {
-    score = 0;
-    scoreDisplay.innerHTML = ` ${score}`;
-    lives = 3;
-    livesDisplay.innerHTML = `Lives: ${lives}`;
-    pacmanCurrentIndex = 349;
-
-    squares.forEach(square => {
-      square.classList.remove(
-        'pac-dot', 'big-dot', 'ghost', 'scared-ghost', 'inky','pinky', 'blinky','clyde',
-        'pacman-image', 'pacman-image-left', 'pacman-image-up', 'pacman-image-down'
-      );
-    });
-  
-    
-    squares.forEach(square => {
-      if (square.classList.contains('pac-dot')) {
-        square.classList.add('pac-dot');
-      }
-    });
-  
-    squares[pacmanCurrentIndex].classList.add('pacman-image');
-  
-    ghosts.forEach((ghost, index) => {
-      ghost.currentIndex = ghost.startIndex;
-      squares[ghost.currentIndex].classList.add(ghost.className, 'ghost');
-    });
-
-    ghost.currentIndex += direction;
-        squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
-  
-    hideModal();
-    startPauseButton.textContent = "Start Game";
-    gameStarted = false;
-  }
- 
-  document.getElementById('restartbtn').addEventListener('click', restartGame);
-  
-
   function checkForWin() {
-    if (score >= 200) {
+    if (score >= 300) {
       gameWin.play();
       eatDotsSound.pause();
       ghosts.forEach((ghost) => clearInterval(ghost.timerId));
@@ -326,25 +480,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function hideModal() {
-    
     overlay.style.display = "none";
-    gameWin.pause()
+    gameWin.pause();
     score = 0;
     scoreDisplay.innerHTML = ` ${score}`;
-   
     squares[pacmanCurrentIndex].classList.remove(
       "pacman-image",
       "pacman-image-left",
       "pacman-image-up",
       "pacman-image-down"
     );
-
-    squares.forEach(square => {
-      square.classList.remove(
-        'ghost', 'scared-ghost', 'inky','pinky', 'blinky','clyde'
-      );
-    });
-    pacmanCurrentIndex = 349;
+    pacmanCurrentIndex = 321;
     squares[pacmanCurrentIndex].classList.add("pacman-image");
   }
 

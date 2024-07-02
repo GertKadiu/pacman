@@ -13,7 +13,7 @@
 
 .grid {
     width: 560px;
-    height: 560px;
+    height: 500px;
     border: 1px solid black;
     display: flex;
     margin: 0;
@@ -140,7 +140,7 @@
 }
 
 .clyde {
-    background-image: url("./images/blinky.png");
+    background-image: url("./images/clyde.png");
     background-size: cover;
     border: 0px !important;
     background-color: transparent !important;
@@ -156,7 +156,7 @@
 }
 
 .ghost {
-    width: 20px;
+    width: 10px;
     height: auto;
 }
 
@@ -269,12 +269,11 @@
   
   .modal {
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
      /* background-color: #1E1D23; */
     border-radius: 5px;
-    padding: 30px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     z-index: 1001;
     color: #FFFFFF;
@@ -285,18 +284,27 @@
     display: flex;
     align-items: center;
   }
+
+  .img-pac-man{
+    object-fit: cover;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 250px;
+    margin: 0;
+    padding: 0;
+  }
   
   .life-image {
-    width: 30px; /* Përshtatni dimensionet sipas nevojës */
+    width: 30px; 
     height: auto;
-    margin-right: 5px; /* Vendosni një distancë mes imazheve */
+    margin-right: 5px; 
   }
   
 
   .close-modal {
     position: absolute;
-    top: 10px; /* ndryshoni sipas nevojës */
-    right: 10px; /* ndryshoni sipas nevojës */
+    top: 10px; 
+    right: 10px; 
     cursor: pointer;
   }
   
@@ -304,6 +312,9 @@
   .restartbtn{
     cursor: pointer;
     font-family: 'Emulogic Regular'; 
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
   }
 
 .pacman {
