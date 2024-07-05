@@ -1,5 +1,7 @@
 import layout from "./Matrix.js";
-import { pacmanEatsDots, pacmanEatsBigDot } from "./GameStatus.js";
+import { pacmanEatsBigDot, pacmanEatsDots } from "./PacmanEats.js";
+// import { pacmanEatsDots } from "./GameStatus.js";
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const squares = document.querySelectorAll(".grid div");
@@ -84,19 +86,17 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
     }
     squares[pacmanCurrentIndex].classList.add("pacman-image");
-    pacmanEatsDots(squares, pacmanCurrentIndex, eatDotsSound, score, scoreDisplay);
-    pacmanEatsBigDot(pacmanCurrentIndex, eatSound, squares, scoreDisplay, score);
+    // pacmanEatsDots(squares, pacmanCurrentIndex, eatDotsSound, score, scoreDisplay);
+    pacmanEatsDots(squares, pacmanCurrentIndex, eatDotsSound)
+    pacmanEatsBigDot( squares,
+      eatSound,
+      pacmanCurrentIndex,
+      ghosts,
+      unScareGhosts);
     checkForGameOvers();
     checkForWin();
   }
-// function pacmanEatsDots() {
-  //   if (squares[pacmanCurrentIndex].classList.contains("pac-dot")) {
-  //     eatDotsSound.play();
-  //     score++;
-  //     scoreDisplay.innerHTML = `${score}`;
-  //     squares[pacmanCurrentIndex].classList.remove("pac-dot");
-  //   }
-  // }
+
 
   function startAutoMove(direction) {
     if (intervalId) clearInterval(intervalId);
@@ -169,7 +169,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   startPauseButton.addEventListener("click", toggleGame);
 
-  
+  // function pacmanEatsDots() {
+  //   if (squares[pacmanCurrentIndex].classList.contains("pac-dot")) {
+  //     eatDotsSound.play();
+  //     score++;
+  //     scoreDisplay.innerHTML = `${score}`;
+  //     squares[pacmanCurrentIndex].classList.remove("pac-dot");
+  //   }
+  // }
 
   function unScareGhosts() {
     ghosts.forEach((ghost) => {
@@ -471,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function checkForWin() {
-    if (score >= 232) {
+    if (score >= 2) {
       gameWin.play();
       eatDotsSound.pause();
       ghosts.forEach((ghost) => clearInterval(ghost.timerId));
