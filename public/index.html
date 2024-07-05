@@ -6,14 +6,14 @@
   <link rel="stylesheet" href="styles.css" />
   <script src="Layout.js" type="module"></script>
   <script src="pacmanMovments.js" type="module"></script>
-  <script src="pacmanEat.js" type="module"></script>
+  <!-- <script src="pacman.js" ></script> -->
 </head>
 <body>   
 
   <div class='overlay'>
     <div class='modal'>
       <img alt="" class="img-pac-man" src="./images/pac-man-logo-png-transparent.png"/>
-      <h3></h3>
+      <h3 style="font-size: 28px;"></h3>
       <button class="restartbtn" id="restartbtn">Restart Game</button>
       <span id="close-modal" class="close-modal">X</span>
     </div>
@@ -24,12 +24,24 @@
       <button class="startBtn" id="start-pause-button">Start Game</button>
     </div>
     <div class="grid"></div>
-    <div style="color: aliceblue" id="lives">Lives: 3</div> 
-    <div class="lives-display" id="lives">
-      <img src="./images/pacman-png-18.png" id="heart" class="life-image" alt="heart">
-      <img src="./images/pacman-png-18.png" id="hear" class="life-image" alt="heart">
-      <img src="./images/pacman-png-18.png" id="hear" class="life-image" alt="heart">
+    <div class="lives-display" id="lives-display">
+      <img src="./images/pacman-png-18.png" class="life-image" alt="heart">
+      <img src="./images/pacman-png-18.png" class="life-image" alt="heart">
+      <img src="./images/pacman-png-18.png" class="life-image" alt="heart">
     </div>
+    <div class="mobile-controls"> 
+      <div style="display: flex; margin-left: 80px">
+        <button id="up-button" class="mobile-button">↑</button>
+      </div>
+      <div style="display: flex; justify-content: space-between; width: 100%;">
+        <button id="left-button" class="mobile-button">←</button>
+        <button id="right-button" class="mobile-button">→</button>
+      </div>
+      <div style="display: flex; margin-left: 80px">
+        <button id="down-button"  class="mobile-button">↓</button>
+      </div> 
+    </div>
+
     
   </div>
 </body>

@@ -12,41 +12,120 @@
   }
 
 .grid {
-    width: 560px;
-    height: 500px;
+    width: 462px;
+    height: 410px;
     border: 1px solid black;
     display: flex;
+   
     margin: 0;
     padding: 0;
     flex-wrap: wrap;
 }
 
 .grid div {
-    width: 20px;
-    height: 20px;
+    width: 16.5px;
+    height: 16.5px;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
+
+@media (max-width: 768px) {
+  .mobile-controls {
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      left: 0;
+      bottom: 20px;
+      
+    }
+    
+    .mobile-button {
+      font-size: 46px;
+      padding: 30px; 
+      margin: 10px; 
+      background-color: rgba(255, 255, 255, 0.7);
+      border: none;
+      border-radius: 50%;
+      width: 140px; 
+      height: 140px; 
+    }
+
+  .grid{
+    width: 1120px;
+    height: 1200px;
+    border: 1px solid black;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+  .grid div{
+    width: 30px;
+    height: 30px;
+  }
+  #h3{
+    font-size: 18px;
+  }
+  .restartbtn{
+    font-size: 18px;
+  }
+}
+
+.StartWall{
+  background-color: #fff;
+}
+
+/* 
+.grid {
+  width: 420px;
+  height: 380px;
+  border: 1px solid black;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.grid div {
+  width: 15px;
+  height: 15px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} */
+
+
 .display{
     display: flex;
     flex-direction: row;
 }
-
 
 .flex {
     display: flex;
     justify-content: center;
     flex-direction: column;
     gap: 10px;
-    max-width: 560px;
+    max-width: 462px;
     margin: auto;
     left: 0;
 }
 
+/* .flex {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 420px;
+  margin: auto;
+  left: 0;
+} */
+
 .points{
     display: flex;
     flex-direction: row;
+    margin-top: 50px;
    align-items: center;
    justify-content: space-between;
    
@@ -255,7 +334,7 @@
 
 .overlay {
     position: fixed;
-    top: 0;
+    top: 5px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -314,80 +393,43 @@
     font-family: 'Emulogic Regular'; 
     background: transparent;
     border: none;
+    font-size: 30px;
     color: #FFFFFF;
   }
 
-.pacman {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 20px;   /* Ndryshoni width në 20px */
-  height: 20px;  /* Ndryshoni height në 20px */
-  background: #464667;
-}
 
-.mouth {
-  animation: eat 0.5s alternate infinite;
-  animation-timing-function: linear;
-  position: absolute;
-  width: 13px;   /* Ndryshoni width në 13px */
-  height: 0;
-  border-top: 7px solid transparent;    /* Ndryshoni border-top në 7px */
-  border-bottom: 7px solid transparent; /* Ndryshoni border-bottom në 7px */
-  border-left: 13px solid #fff;         /* Ndryshoni border-left në 13px */
-}
+ #right-button{
+  margin-right: 50px;
+ }
 
-@keyframes eat {
-  0% {
-    border-top: 8px solid transparent;  /* Ndryshoni border-top në 8px */
-    border-bottom: 8px solid transparent;  /* Ndryshoni border-bottom në 8px */
-  }
-  100% {
-    border-top: 0 solid transparent;
-    border-bottom: 0 solid transparent;
-  }
-}
-
-@keyframes foodie {
-  0% {
-    transform: translateX(-1px);   /* Ndryshoni transform translateX në -1px */
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(-17px);  /* Ndryshoni transform translateX në -17px */
-    opacity: 0;
-  }
-}
-
-
-  /* .pacman-image-left {
-    transform: rotate(180deg);
-  }
-  
-  .pacman-image-right {
-    transform: rotate(0deg);
-  }
-  
-  .pacman-image-up {
-    transform: rotate(270deg);
-  }
-  
-  .pacman-image-down {
-    transform: rotate(90deg);
-  } */
-
-/* .pacman-image {
-    transition: transform 0.3s ease;
-    width: 20px; 
-    height: 20px;
-  }
-  
+.mobile-controls {
+display: none;
  
+  margin: auto;
+  left: 0;
+  bottom: 20px;
+  
+}
+
+.mobile-button {
+  font-size: 46px;
+  padding: 30px; 
+  margin: 10px; 
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 140px; 
+  height: 140px; 
+}
+
+
+
+
+
+
+
+  
+  
 
 
   
